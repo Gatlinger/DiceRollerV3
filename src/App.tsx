@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {DiceMainPage} from "./components/Pages/DiceMainPage";
+import {AppBarHeader} from "./components/AppBarHeader";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HistoryPage} from "./components/Pages/HistoryPage";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <AppBarHeader/>
+            <Routes>
+                <Route path={"/*"} element={<DiceMainPage/>}/>
+                <Route path={"/history"} element={<HistoryPage/>}/>
+            </Routes>
+        </>
+    )
 }
 
 export default App;

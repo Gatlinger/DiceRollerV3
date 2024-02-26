@@ -1,0 +1,9 @@
+{
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.inlayHints.fontSize": 12,
+    "editor.inlayHints.padding": true,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.guides.bracketPairs": "active",
+    "color-highlight.markRuler": false,
+    "editor.fontLigatures": true
+}
