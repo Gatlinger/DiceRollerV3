@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/DiceRollerV3/static/css/main.f855e6bc.css",
-    "main.js": "/DiceRollerV3/static/js/main.1c85f04c.js",
+    "main.js": "/DiceRollerV3/static/js/main.da4aae82.js",
     "static/js/592.1391ab97.chunk.js": "/DiceRollerV3/static/js/592.1391ab97.chunk.js",
     "index.html": "/DiceRollerV3/index.html",
     "main.f855e6bc.css.map": "/DiceRollerV3/static/css/main.f855e6bc.css.map",
-    "main.1c85f04c.js.map": "/DiceRollerV3/static/js/main.1c85f04c.js.map",
+    "main.da4aae82.js.map": "/DiceRollerV3/static/js/main.da4aae82.js.map",
     "592.1391ab97.chunk.js.map": "/DiceRollerV3/static/js/592.1391ab97.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.1c85f04c.js"
+    "static/js/main.da4aae82.js"
   ]
 }
