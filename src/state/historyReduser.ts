@@ -1,5 +1,8 @@
-import {ActionType, initialResultState, ResultStateType, ResultType} from "./resultReducer";
-import {initialState} from "./diceReducer";
+import { ActionType, initialResultState, ResultStateType, ResultType } from "./resultReducer";
+import { initialState } from "./diceReducer";
+import { log } from "console";
+import { useEffect, useState } from "react";
+import { setTimeout } from "timers/promises";
 
 export type SingleHistoryStateType = {
     name: string
@@ -25,26 +28,29 @@ export const initialHistoryArray: HistoryStateType = {}
 export const historyReducer = (state: HistoryStateType = initialHistoryArray, action: HistoryActionType): HistoryStateType => {
     switch (action.type) {
         case "ADD-NEW-HISTORY": {
-            let stateCopy = {...state}
+
+            let stateCopy = { ...state }
+
             const nameArray = Object.keys(action.history)
+            let newHistory: Array<SingleHistoryStateType> = []
+
             const date = new Date()
             const hour = date.getHours()
             const minute = date.getMinutes()
             const seconds = date.getSeconds()
-            const currantTimeKey = hour + ':' + minute + '.' + seconds
+            // const currantTimeKey = hour + ':' + minute + '.' + seconds
+            const prevTimekey: string = hour + ':' + minute + '.' + seconds
+
             for (let i = 0; i < nameArray.length; i++) {
-                if (action.history[nameArray[i]].length > 0) {
-                    for (let j = 0; j < action.history[nameArray[i]].length; j++) {
-                        const newHistory = {name: action.history[nameArray[i]][j].name, value: action.history[nameArray[i]][j].value}
-                        stateCopy = {...stateCopy, [currantTimeKey]: [...stateCopy[currantTimeKey], newHistory]}
-                    }
-                }
+                action.history[nameArray[i]].map(e => newHistory = [...newHistory, { name: e.name, value: e.value }])
+
             }
-            console.log(stateCopy)
-            return stateCopy
+            // console.log({...stateCopy, [hour + ':' + minute + '.' + seconds]: newHistory});
+
+            return { ...stateCopy, [hour + ':' + minute + '.' + seconds]: newHistory }
         }
         case "RESET-HISTORY": {
-            return {...initialHistoryArray}
+            return { ...initialHistoryArray }
         }
         default:
             return state
@@ -52,8 +58,8 @@ export const historyReducer = (state: HistoryStateType = initialHistoryArray, ac
 }
 
 export const addNewHistoryAC = (history: ResultStateType): AddNewHistoryActionType => {
-    return {type: "ADD-NEW-HISTORY", history}
+    return { type: "ADD-NEW-HISTORY", history }
 }
 export const resetHistoryAC = (): ResetHistoryActionType => {
-    return {type: "RESET-HISTORY"}
+    return { type: "RESET-HISTORY" }
 }

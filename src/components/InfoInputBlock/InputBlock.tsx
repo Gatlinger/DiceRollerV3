@@ -1,17 +1,18 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { decrementValueAC, incrementValueAC, StateType } from "../../state/diceReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "../../state/store";
 import { ResultStateType, rollManyDicesAC } from "../../state/resultReducer";
 import { Casino } from "@mui/icons-material";
-import { addNewHistoryAC } from "../../state/historyReduser";
+import { HistoryStateType, addNewHistoryAC } from "../../state/historyReduser";
 
 export const InputBlock = () => {
 
     const dices = useSelector<AppRootStateType, Array<StateType>>(state => state.dices)
     const rolledDices = useSelector<AppRootStateType, ResultStateType>(state => state.rolledDices)
-    const state = useSelector<AppRootStateType, AppRootStateType>(state => state)
+    const history = useSelector<AppRootStateType, HistoryStateType>(state => state.history)
+
 
     const dispatch = useDispatch()
     const valuesArray: Array<StateType> = dices.filter(e => e.value !== 0)
@@ -19,11 +20,16 @@ export const InputBlock = () => {
 
     const [modValue, setModValue] = useState<number>(0)
 
-    useEffect(() => { dispatch(addNewHistoryAC(rolledDices)) }, [rolledDices])
+        // useEffect(() => { dispatch(addNewHistoryAC(rolledDices)) }, [rolledDices])
+
+
+
     const rollButtonHandler = () => {
-
-        dispatch(rollManyDicesAC(valuesArray))
-
+            dispatch(rollManyDicesAC(valuesArray))
+            const foo = () => { dispatch(addNewHistoryAC(rolledDices)) }
+            foo()
+            console.log(history);
+            
     }
     const rollButtonHandler2 = () => {
 

@@ -13,8 +13,6 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // @ts-ignore
 export const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-console.log(store)
-console.log(store.getState())
 
 
 // @ts-ignore

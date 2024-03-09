@@ -1,10 +1,11 @@
 import React from "react";
-import {Button, Stack, Typography} from "@mui/material";
-import {AppRootStateType, store} from "../../state/store";
-import {initialState, resetButtonAC, StateType} from "../../state/diceReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {ResultStateType, rollOneDiceAC} from "../../state/resultReducer";
-import {RestartAlt} from "@mui/icons-material";
+import { Button, Stack, Typography } from "@mui/material";
+import { AppRootStateType, store } from "../../state/store";
+import { initialState, resetButtonAC, StateType } from "../../state/diceReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { ResultStateType, rollOneDiceAC } from "../../state/resultReducer";
+import { RestartAlt } from "@mui/icons-material";
+import { addNewHistoryAC } from "../../state/historyReduser";
 
 // export const InfoBlock = () => {
 //     return (
@@ -31,9 +32,11 @@ export const InfoBlock = () => {
             {dices.map(d => {
                 const oneDiceRoll = () => {
                     dispatch(rollOneDiceAC(d.id, d.name, d.sides))
+                    const foo = () => { dispatch(addNewHistoryAC(rolledDices)) }
+                    foo()
                 }
-                    return (
-                        <>
+                return (
+                    <>
                         <Stack m={1}>
                             <Stack spacing={1} direction={'row'} mt={1}>
                                 <Button variant={"contained"} onClick={oneDiceRoll}>
@@ -42,9 +45,9 @@ export const InfoBlock = () => {
                                 <Typography variant={"h3"}>{d.name}</Typography>
                             </Stack>
                         </Stack>
-                        </>
-                    )
-                }
+                    </>
+                )
+            }
             )}
             <Stack m={1}>
                 <Stack spacing={1} direction={'row'} mt={1}>
@@ -53,7 +56,7 @@ export const InfoBlock = () => {
             </Stack>
             <Stack m={1}>
                 <Stack spacing={1} direction={'row'}>
-                    <Button fullWidth={true} variant={"contained"} onClick={resetButtonHandler}>{<RestartAlt/>}RESET</Button>
+                    <Button fullWidth={true} variant={"contained"} onClick={resetButtonHandler}>{<RestartAlt />}RESET</Button>
                 </Stack>
             </Stack>
         </div>

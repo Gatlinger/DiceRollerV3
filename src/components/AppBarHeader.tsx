@@ -1,27 +1,30 @@
-import React from "react";
-import {AppBar, Box, Button, Divider, Drawer, Grid, Icon, List, Stack, Toolbar, Typography} from "@mui/material";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import {HistoryPage} from "./Pages/HistoryPage";
-import {Casino, History, Menu} from "@mui/icons-material";
+import { Casino, History, Menu } from "@mui/icons-material";
+import { AppBar, Box, Button, Divider, Drawer, List, Toolbar } from "@mui/material";
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { AppRootStateType } from "../state/store";
+import { ResultStateType } from "../state/resultReducer";
 
 export const AppBarHeader = () => {
     const [open, setOpen] = React.useState(false);
+    const rolledDices = useSelector<AppRootStateType, ResultStateType>(state => state.rolledDices)
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
 
     const DrawerList = (
-        <Box sx={{width: 250}} role="presentation" onClick={toggleDrawer(false)}>
+        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
             <List>
-                <Link to={"/*"}>
-                    <Button variant={"contained"} color={"info"} fullWidth={true}>{<Casino/>}ROLL DICES</Button>
+                <Link to={"/"}>
+                    <Button variant={"contained"} color={"info"} fullWidth={true}>{<Casino />}ROLL DICES</Button>
                 </Link>
             </List>
-            <Divider/>
+            <Divider />
             <List>
                 <Link to={"/history"}>
-                    <Button variant={"contained"} color={"info"} fullWidth={true}>{<History/>}HISTORY</Button>
+                    <Button variant={"contained"} color={"info"} fullWidth={true}>{<History />}HISTORY</Button>
                 </Link>
             </List>
         </Box>
@@ -31,19 +34,7 @@ export const AppBarHeader = () => {
         <>
             <AppBar position={"static"}>
                 <Toolbar>
-                    {/*<Grid container spacing={1}>*/}
-                    {/*    <Grid item xs={6}>*/}
-                    {/*        <Link to={"/*"}>*/}
-                    {/*            <Button variant={"contained"} color={"info"} fullWidth={true}>ROLL DICES</Button>*/}
-                    {/*        </Link>*/}
-                    {/*    </Grid>*/}
-                    {/*    <Grid item xs={6}>*/}
-                    {/*        <Link to={"/history"}>*/}
-                    {/*            <Button variant={"contained"} color={"info"} fullWidth={true}>HISTORY</Button>*/}
-                    {/*        </Link>*/}
-                    {/*    </Grid>*/}
-                    {/*</Grid>*/}
-                    <Button variant={"contained"} color={"info"} onClick={toggleDrawer(true)}>{<Menu/>} OPEN MENU</Button>
+                    <Button variant={"contained"} color={"info"} onClick={toggleDrawer(true)}>{<Menu />} OPEN MENU</Button>
                     <Drawer open={open} onClose={toggleDrawer(false)}>
                         {DrawerList}
                     </Drawer>
